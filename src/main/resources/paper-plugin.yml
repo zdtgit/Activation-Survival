@@ -1,0 +1,13 @@
+main: "com.activation.survival.ActivationSurvival"
+name: "Activation-Survival"
+version: "1.0"
+api-version: "1.20"
+
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: true
+    PlaceholderAPI:
+      load: BEFORE
+      required: true
