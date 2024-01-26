@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import kotlin.random.Random
 
@@ -17,13 +18,23 @@ class PlayerListener: Listener {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
         val player = event.player
-        val prefix = PlaceholderAPI.setPlaceholders(player, "")
+        val prefix = PlaceholderAPI.setPlaceholders(player, "%luckperms_prefix%")
+        val name = player.name
 
         if (player.hasPlayedBefore()) {
-            event.joinMessage("${prefix}&7님이 접속하셨습니다.".legacy)
+            event.joinMessage("${prefix}${name}&e님이 접속하셨습니다.".legacy)
         } else {
-            event.joinMessage("${prefix}&7님이 처음 접속하셨습니다.".legacy)
+            event.joinMessage("${prefix}${name}&e님이 처음 접속하셨습니다.".legacy)
         }
+    }
+
+    @EventHandler
+    fun onQuit(event: PlayerQuitEvent) {
+        val player = event.player
+        val prefix = PlaceholderAPI.setPlaceholders(player, "%luckperms_prefix%")
+        val name = player.name
+
+        event.quitMessage("${prefix}${name}&e님이 접속하셨습니다.".legacy)
     }
 
     @EventHandler
